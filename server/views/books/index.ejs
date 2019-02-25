@@ -1,15 +1,20 @@
+<!-- Project Name: COMP308-W2019-MidTerm-300976308
+   File Name: index.ejs
+   Name: Tejinder Kaur
+   Student id: 300976308
+   Date: February 25, 2019 -->
+
 <% include ../partials/header.ejs %>
 
     <!-- MAIN CONTENT -->
     <div class="container">
+     <div class="jumbotron">
       <div class="row">
         <div class="col-md-offset-1 col-md-10">
-          <h3>Favourite Books List </h3>
-          <!-- ------------------------ -->
-          <!-- FIX THE ADD BUTTON BELOW -->
-          <!-- ------------------------ -->
-          <a href="" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
-          <br>
+          <h3><b>Favourite Books List </b></h3>
+
+          <a href="/books/add" class="btn btn-primary"><i class="fa fa-plus"></i> Add a book</a>
+          <br><br>
           <div class="table-responsive">
             <table class="table table-bordered table-striped table-hover">
               <thead>
@@ -30,17 +35,12 @@
                   <td class="text-center">$<%= books[count].Price %></td>
                   <td class="text-center"><%= books[count].Author %></td>
                   <td class="text-center"><%= books[count].Genre %></td>
-
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the EDIT BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <a href="/books/<%= books[count]._id %>" class="btn btn-primary"><i class="fa fa-edit"></i>&nbsp EDIT</a>
                   </td>
-
                   <td class="text-center">
-                    <!-- ------------------------ -->
-                    <!-- ADD the DELETE BUTTON HERE -->
-                    <!-- ------------------------ -->
+                    <a href="/books/delete/<%= books[count]._id %>" class="btn btn-danger"><i class="fa fa-trash"></i>&nbsp DELETE</a>
+                  </td>
                   </td>
                 </tr>
                 <% } %>
@@ -53,7 +53,6 @@
         </div>
       </div>
     </div>
+    </div>
 
 <% include ../partials/footer.ejs %>
-
-

@@ -1,3 +1,9 @@
+/* Project Name: COMP308-W2019-MidTerm-300976308
+   File Name: server.js
+   Name: Tejinder Kaur
+   Student id: 300976308
+   Date: February 25, 2019 */
+
 let app = require('./server/app');
 let debug = require('debug')('comp308-w2019-midterm:server');
 let http = require('http');

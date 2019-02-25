@@ -1,3 +1,9 @@
+/* Project Name: COMP308-W2019-MidTerm-300976308
+   File Name: books.js
+   Name: Tejinder Kaur
+   Student id: 300976308
+   Date: February 25, 2019 */
+
 // modules required for routing
 let express = require('express');
 let router = express.Router();
@@ -25,46 +31,80 @@ router.get('/', (req, res, next) => {
 
 //  GET the Book Details page in order to add a new Book
 router.get('/add', (req, res, next) => {
-
-    /*****************
-     * ADD CODE HERE *
-     *****************/
-
+    res.render('books/details', {
+      title: 'Add Book Details'
+    });
 });
 
 // POST process the Book Details page and create a new Book - CREATE
 router.post('/add', (req, res, next) => {
-
-    /*****************
-     * ADD CODE HERE *
-     *****************/
-
+  let addBook = book({
+    "Title": req.body.Title,
+    "Price": req.body.Price,
+    "Author": req.body.Author,
+    "Genre": req.body.Genre
+    });
+    book.create(addBook, (err, contactModel) => {
+    if(err) {
+        console.log(err);
+        res.end(err);
+    }
+    else {
+       res.redirect('/books');
+    }
+    });
 });
 
 // GET the Book Details page in order to edit an existing Book
 router.get('/:id', (req, res, next) => {
-
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+    let id = req.params.id;
+    book.findById(id, (err, bookObject) => {
+        if(err) {
+            console.log(err);
+            res.end(err);
+        }
+        else {          
+            res.render('books/details', {
+                title: 'Edit Book Details',
+                books: bookObject
+            });
+        }
+    });
 });
 
 // POST - process the information passed from the details form and update the document
 router.post('/:id', (req, res, next) => {
-
-    /*****************
-     * ADD CODE HERE *
-     *****************/
-
+    let id = req.params.id;
+    let bookupdate = book({
+        "_id": id,
+        "Title": req.body.Title,
+        "Price": req.body.Price,
+        "Author": req.body.Author,
+        "Genre": req.body.Genre
+    });
+    book.update({_id: id}, bookupdate, (err) => {
+        if(err) {
+            console.log(err);
+            res.end(err);
+        }
+        else {                       
+            res.redirect('/books');
+        }
+    })
 });
 
 // GET - process the delete by user id
 router.get('/delete/:id', (req, res, next) => {
-
-    /*****************
-     * ADD CODE HERE *
-     *****************/
+  let id = req.params.id;
+  book.remove({_id: id}, (err) => {
+      if(err) {
+          console.log(err);
+          res.end(err);
+      }
+      else {          
+          res.redirect('/books');
+      }
+  });
 });
-
 
 module.exports = router;

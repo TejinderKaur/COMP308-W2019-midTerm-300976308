@@ -1,3 +1,9 @@
+/* Project Name: COMP308-W2019-MidTerm-300976308
+   File Name: app.js
+   Name: Tejinder Kaur
+   Student id: 300976308
+   Date: February 25, 2019 */
+
 // moddules for node and express
 let createError = require('http-errors');
 let express = require('express');
@@ -35,6 +41,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../client')));
+app.use('/client/Assets/images',express.static('./client/Assets/images'));
 
 
 // route redirects
